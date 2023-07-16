@@ -1,0 +1,39 @@
+﻿@model TodoViewModel
+@using Humanizer
+
+@{
+	ViewData["Title"] = "Manage your todo list";
+} 
+
+<!-- At the very top of the file, the  directive tells Razor which model
+to expect this view to be bound to. The model is accessed through the
+Model property -->
+
+
+<div class="panel panel-default todo-panel">
+	<div class="panel-heading">@ViewData["Title"]</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<td>&#x2714;</td>
+				<td>Item</td>
+				<td>Due</td>
+				Create a view
+				28
+			</tr>
+		</thead>
+			@foreach (var item in Model.Items)
+			{
+			<tr>
+				<td>
+					<input type="checkbox" class="done-checkbox">
+				</td>
+				<td>@item.Title</td>
+				<td>@item.DueAt.Humanize()</td>
+			</tr>
+			}
+	</table>
+	<div class="panel-footer add-item-form">
+		<!-- TODO: Add item form -->
+	</div>
+</div>
