@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using AspNetCoreTodo.Data;
 using System;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<ITodoItemService, FakeTodoItemService>();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext")));
 
-/*builder.Services.AddDbContext<ApplicationDbContext>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));*/
 
 
 var app = builder.Build();
