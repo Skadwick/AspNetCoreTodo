@@ -15,10 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<ITodoItemService, FakeTodoItemService>();
+//builder.Services.AddSingleton<ITodoItemService, FakeTodoItemService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext")));
-
+builder.Services.AddScoped<ITodoItemService, TodoItemService>();
 
 
 var app = builder.Build();

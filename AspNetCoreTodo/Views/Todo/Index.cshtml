@@ -18,8 +18,6 @@ Model property -->
 				<td>&#x2714;</td>
 				<td>Item</td>
 				<td>Due</td>
-				Create a view
-				28
 			</tr>
 		</thead>
 			@foreach (var item in Model.Items)
@@ -34,6 +32,6 @@ Model property -->
 			}
 	</table>
 	<div class="panel-footer add-item-form">
-		<!-- TODO: Add item form -->
+		@await Html.PartialAsync("AddItemPartial", new TodoItem())
 	</div>
 </div>

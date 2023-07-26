@@ -16,8 +16,11 @@ namespace AspNetCoreTodo.Data
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
 		{
+
 		}
 
+		//ef migrations add AddItems
+		//dotnet ef database update
 		public DbSet<TodoItem> Items { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
