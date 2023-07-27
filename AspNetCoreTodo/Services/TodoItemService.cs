@@ -7,6 +7,11 @@ using AspNetCoreTodo.Models;
 using Microsoft.EntityFrameworkCore;
 namespace AspNetCoreTodo.Services
 {
+
+	/*
+	 * This is the service class which does most of the interactions with the Database. 
+	 * This work could be done in the controller, but it is good to separate functionalities.
+	 */
 	public class TodoItemService : ITodoItemService
 	{
 		private readonly ApplicationDbContext _context;
@@ -32,6 +37,19 @@ namespace AspNetCoreTodo.Services
 			_context.Items.Add(newItem);
 			var saveResult = await _context.SaveChangesAsync();
 			return saveResult == 1;
+		}
+
+		//Logic to apply checked todo item (item done) to the DB.
+		public async Task<bool> MarkDoneAsync(Guid id)
+		{
+			var item = await _context.Items
+			.Where(x => x.Id == id)
+			.SingleOrDefaultAsync();
+
+			if (item == null) return false;
+			item.IsDone = true;
+			var saveResult = await _context.SaveChangesAsync(); //the change only applies localy until SaveChangesAsync is called
+			return saveResult == 1; // One entity should have been updated
 		}
 
 

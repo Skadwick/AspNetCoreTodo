@@ -20,15 +20,23 @@ Model property -->
 				<td>Due</td>
 			</tr>
 		</thead>
-			@foreach (var item in Model.Items)
+			@foreach (var item in Model.Items) //Foreach loop to iterate over all todo items
 			{
 			<tr>
 				<td>
-					<input type="checkbox" class="done-checkbox">
+					<form asp-action="MarkDone" method="POST">
+						<input type="checkbox" class="done-checkbox">
+						<input type="hidden" name="id" value="@item.Id"> 
+					</form>
 				</td>
 				<td>@item.Title</td>
 				<td>@item.DueAt.Humanize()</td>
 			</tr>
+			<!--The above line (item.ID) gets item ID so controller knows which item was checked.
+				See wwwroot\JS\Site.js
+			-->
+
+
 			}
 	</table>
 	<div class="panel-footer add-item-form">
